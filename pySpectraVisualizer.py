@@ -7,8 +7,10 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
 import pandas as pd
 
-dfmt = '%Y%m%d %H%m'
-xfmt = md.DateFormatter(dfmt)
+#dfmt = '%Y%m%d %H%m'
+dfmt = '%H:%M:%S'
+#xfmt = md.DateFormatter(dfmt)
+xfmt = md.DateFormatter('%H')
 
 def str2num(string):
   try:
@@ -229,6 +231,9 @@ class Application(tki.Frame):
     self.axTH.set_xlim(xlim)
     self.axTH.set_ylim(ylim)
     self.axTH.xaxis.set_major_formatter(xfmt)
+    self.axTH.set_xlabel('time')
+    self.axTH.set_ylabel('height   [m]')
+    self.axTH.set_title('Basetime= '+tt[0].strftime('%Y-%m-%d %H:%M'))
     #plt.tight_layout()
     self.canvasTH.draw()
 
@@ -250,6 +255,9 @@ class Application(tki.Frame):
     self.axTS.xaxis.set_major_formatter(xfmt)
     self.axTS.set_xlim(xlim)
     self.axTS.set_ylim(ylim)
+    self.axTS.set_xlabel('time')
+    self.axTS.set_ylabel(var.name + ' ' + var.units)
+    self.axTS.set_title('Basetime= '+tt[0].strftime('%Y-%m-%d %H:%M'))
     self.canvasTS.draw()
 
   def _drawProfile(self, dx):
@@ -268,6 +276,8 @@ class Application(tki.Frame):
     self.axPr.grid()
     self.axPr.set_xlim(xlim)
     self.axPr.set_ylim(ylim)
+    self.axPr.set_ylabel('height   [m]')
+    self.axPr.set_xlabel(var.name + ' ' + var.units)
     self.canvasPr.draw()
 
   def _drawSpectroGram(self, dx):
@@ -289,6 +299,8 @@ class Application(tki.Frame):
       mesh = self.axSG.pcolormesh(X,H,Y, vmin=None, vmax=None)
       self.cbSG = plt.colorbar(mesh, label=Yvar.name + ' ' + Yvar.units,
                                ax=self.axSG, orientation='vertical')
+      self.axSG.set_ylabel('height   [m]')
+      self.axSG.set_xlabel(Xvar.name + ' ' + Xvar.units)
     self.axSG.set_ylim(ylim)
     self.canvasSG.draw()
 
@@ -307,7 +319,9 @@ class Application(tki.Frame):
       X = 0
       Y = 0
     self.axSp.clear()
-    self.axSp.plot(X,Y)    
+    self.axSp.plot(X,Y)
+    self.axSp.set_ylabel(Yvar.name + ' ' + Yvar.units)
+    self.axSp.set_xlabel(Xvar.name + ' ' + Xvar.units)
     self.canvasSp.draw()
 
 
