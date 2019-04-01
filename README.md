@@ -2,6 +2,15 @@
 
 This is a Sunday, fun project turned into a radar spectra visualizer for pamtra
 
+The visualizer works best on Linux platforms. It has been tested on Windows 10 under Anaconda and works with some visualization problems regarding size and position of frames and labels
+
+DEPENDENCIES:
+  - numpy
+  - scipy
+  - matplolib
+  - tkinter
+  - netCDF4
+
 To test the software, clone the repository and download a sample data file (7 GB !!!) from the following link https://uni-koeln.sciebo.de/s/X9kjogWlwvGo4Sg 
 
 Simply run 
